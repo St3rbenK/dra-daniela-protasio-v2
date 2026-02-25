@@ -73,13 +73,10 @@ function App() {
             <li><a href="#especialidades" onClick={() => setIsMenuOpen(false)}>Especialidades</a></li>
             <li><a href="#sobre" onClick={() => setIsMenuOpen(false)}>Sobre</a></li>
             <li><a href="#contato" onClick={() => setIsMenuOpen(false)}>Contato</a></li>
-            <li className="mobile-only" style={{ marginTop: '2rem' }}>
-              <a href={whatsappUrl} className="btn btn-primary">Agendar Consulta</a>
-            </li>
           </ul>
         </nav>
 
-        <a href={whatsappUrl} className="btn btn-primary desktop-only" style={{padding: '0.6rem 1.5rem', fontSize: '0.75rem'}}>
+        <a href={whatsappUrl} className="btn btn-primary nav-cta" style={{padding: '0.6rem 1.5rem', fontSize: '0.75rem'}}>
           Agendar Consulta
         </a>
       </header>
