@@ -60,6 +60,10 @@ function App() {
             <li><a href="#sobre" onClick={closeMenu}>Sobre</a></li>
             <li><a href="#contato" onClick={closeMenu}>Contato</a></li>
           </ul>
+          {/* Botão dentro do Sidebar (Mobile) */}
+          <a href={whatsappUrl} className="btn btn-primary mobile-menu-btn" onClick={closeMenu}>
+            Agendar Consulta <WhatsAppIcon size={18} color="white" />
+          </a>
         </nav>
 
         <a href={whatsappUrl} className="btn btn-primary nav-cta-desktop" style={{padding: '0.7rem 1.8rem'}}>

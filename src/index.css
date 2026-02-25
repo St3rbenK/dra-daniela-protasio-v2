@@ -193,7 +193,23 @@ nav a:hover {
   width: 100%;
   max-width: 500px;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  /* Sombra colorida profunda e moderna */
+  box-shadow: 
+    0 30px 60px -12px rgba(85, 107, 47, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Sidebar Mobile Button --- */
+.mobile-menu-btn {
+  display: none;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
 }
 
 /* --- Buttons --- */
