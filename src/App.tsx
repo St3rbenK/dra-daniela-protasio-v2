@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { 
   Heart, 
   Leaf, 
   Wind, 
-  Users, 
   ArrowRight, 
   MessageCircle, 
   Phone, 
@@ -11,8 +10,9 @@ import {
   MapPin, 
   Instagram, 
   Facebook, 
-  Star,
-  Check
+  Check,
+  Menu,
+  X
 } from 'lucide-react'
 
 // Import de imagens locais
@@ -33,8 +33,11 @@ const WhatsAppIcon = ({ size = 24, color = "currentColor" }) => (
 )
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
-  const whatsappUrl = "https://wa.me/5554999123456"; // Placeholder WhatsApp
+  const whatsappUrl = "https://wa.me/5571982324761"; 
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <div className="app">
@@ -52,21 +55,30 @@ function App() {
       {/* Header */}
       <header>
         <a href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <img src={logoImg} alt="Logo Dra. Daniela Protásio" style={{ height: '60px', width: 'auto' }} />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <img src={logoImg} alt="Logo Dra. Daniela Protásio" style={{ height: '50px', width: 'auto' }} />
+          <div className="logo-text">
             Dra. Daniela Protásio
             <span>Medicina Integrativa</span>
           </div>
         </a>
-        <nav>
+
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menu">
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <nav className={isMenuOpen ? 'open' : ''}>
           <ul>
-            <li><a href="#home">Início</a></li>
-            <li><a href="#especialidades">Especialidades</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#contato">Contato</a></li>
+            <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Início</a></li>
+            <li><a href="#especialidades" onClick={() => setIsMenuOpen(false)}>Especialidades</a></li>
+            <li><a href="#sobre" onClick={() => setIsMenuOpen(false)}>Sobre</a></li>
+            <li><a href="#contato" onClick={() => setIsMenuOpen(false)}>Contato</a></li>
+            <li className="mobile-only" style={{ marginTop: '2rem' }}>
+              <a href={whatsappUrl} className="btn btn-primary">Agendar Consulta</a>
+            </li>
           </ul>
         </nav>
-        <a href={whatsappUrl} className="btn btn-primary" style={{padding: '0.6rem 1.5rem', fontSize: '0.75rem'}}>
+
+        <a href={whatsappUrl} className="btn btn-primary desktop-only" style={{padding: '0.6rem 1.5rem', fontSize: '0.75rem'}}>
           Agendar Consulta
         </a>
       </header>
@@ -84,7 +96,7 @@ function App() {
               Iniciar Tratamento <ArrowRight size={18} />
             </a>
             <a href="#especialidades" className="btn btn-outline">
-              Conhecer Especialidades
+              Ver Especialidades
             </a>
           </div>
         </div>
@@ -92,12 +104,7 @@ function App() {
           <img 
             src={draHero} 
             alt="Dra. Daniela Protásio" 
-            className="hero-img-placeholder"
-            style={{ 
-              background: 'transparent', 
-              boxShadow: 'none', 
-              filter: 'drop-shadow(20px 20px 0px var(--primary-light))' 
-            }} 
+            className="hero-img-main"
           />
         </div>
       </section>
@@ -112,17 +119,17 @@ function App() {
         
         <div className="services-grid">
           <div className="service-card">
-            <div className="service-icon"><Heart size={40} strokeWidth={1.5} /></div>
+            <div className="service-icon"><Heart size={32} strokeWidth={1.5} /></div>
             <h3>Homeopatia</h3>
             <p>Tratamento que estimula a cura natural do organismo através de substâncias diluídas, tratando a pessoa como um todo.</p>
           </div>
           <div className="service-card">
-            <div className="service-icon"><Leaf size={40} strokeWidth={1.5} /></div>
+            <div className="service-icon"><Leaf size={32} strokeWidth={1.5} /></div>
             <h3>Fitoterapia</h3>
             <p>Utilização do poder das plantas medicinais para prevenção e tratamento de diversas patologias de forma segura.</p>
           </div>
           <div className="service-card">
-            <div className="service-icon"><Wind size={40} strokeWidth={1.5} /></div>
+            <div className="service-icon"><Wind size={32} strokeWidth={1.5} /></div>
             <h3>Medicina Integrativa</h3>
             <p>Foco na relação médico-paciente e no uso de todas as abordagens terapêuticas adequadas para a saúde e cura.</p>
           </div>
@@ -135,8 +142,7 @@ function App() {
            <img 
               src={draAbout} 
               alt="Consultório Dra. Daniela" 
-              className="hero-img-placeholder" 
-              style={{ height: '550px', width: '100%', objectFit: 'cover' }} 
+              style={{ width: '100%', maxWidth: '450px', borderRadius: '12px', boxShadow: 'var(--shadow-md)' }} 
             />
         </div>
         <div className="about-text">
@@ -144,9 +150,6 @@ function App() {
           <h2>Cuidar com olhar atento e humanizado.</h2>
           <p>
             Sou a Dra. Daniela Protásio, médica apaixonada pela medicina que enxerga além dos sintomas. Com especialização em Homeopatia e Fitoterapia, meu objetivo é ajudar você a reencontrar seu equilíbrio natural.
-          </p>
-          <p>
-            Acredito que a saúde é o resultado da harmonia entre corpo, mente e emoções. Por isso, cada consulta é um momento de escuta profunda para construirmos juntos um caminho de vitalidade.
           </p>
           <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem'}}>
              <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
@@ -171,16 +174,18 @@ function App() {
           "A Dra. Daniela mudou minha percepção sobre saúde. Com o tratamento homeopático, recuperei minha disposição e tratei problemas que persistiam há anos."
         </div>
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem'}}>
-          <div style={{width: '40px', height: '40px', background: 'var(--primary-light)', borderRadius: '50%'}}></div>
+          <div style={{width: '45px', height: '45px', background: 'var(--primary-light)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Star size={20} fill="white" color="white" />
+          </div>
           <div style={{textAlign: 'left'}}>
             <strong style={{display: 'block'}}>Mariana Lopes</strong>
-            <span style={{fontSize: '0.8rem', opacity: 0.7}}>Paciente há 2 anos</span>
+            <span style={{fontSize: '0.8rem', opacity: 0.8}}>Paciente há 2 anos</span>
           </div>
         </div>
       </section>
 
       {/* Appointment CTA */}
-      <section style={{textAlign: 'center', backgroundColor: '#FDFDFB'}}>
+      <section style={{textAlign: 'center', backgroundColor: '#FDFDFB', padding: '6rem 5%'}}>
         <div style={{maxWidth: '700px', margin: '0 auto'}}>
           <h2 style={{fontSize: '2.5rem', marginBottom: '1.5rem'}}>Pronta para transformar sua saúde?</h2>
           <p style={{marginBottom: '3rem', color: 'var(--text-muted)'}}>
@@ -198,22 +203,22 @@ function App() {
           <div className="footer-col">
             <a href="/" className="logo" style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <img src={logoImg} alt="Logo Dra. Daniela" style={{ height: '50px' }} />
-              <div>
+              <div className="logo-text">
                 Dra. Daniela Protásio
                 <span>Medicina Integrativa</span>
               </div>
             </a>
             <p style={{maxWidth: '300px'}}>Promovendo saúde integral e natural através de um atendimento médico humanizado.</p>
             <div style={{display: 'flex', gap: '1rem', marginTop: '2rem'}}>
-              <a href="#" style={{color: 'var(--primary)'}}><Instagram /></a>
-              <a href="#" style={{color: 'var(--primary)'}}><Facebook /></a>
+              <a href="#" style={{color: 'var(--primary)'}} aria-label="Instagram"><Instagram /></a>
+              <a href="#" style={{color: 'var(--primary)'}} aria-label="Facebook"><Facebook /></a>
             </div>
           </div>
           
           <div className="footer-col">
-            <h4>Contatos</h4>
+            <h4 style={{fontFamily: 'Montserrat'}}>Contatos</h4>
             <p style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
-              <Phone size={18} color="var(--primary)" /> (54) 99912-3456
+              <Phone size={18} color="var(--primary)" /> (71) 98232-4761
             </p>
             <p style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
               <Mail size={18} color="var(--primary)" /> contato@dradanielaprotasio.com.br
@@ -221,7 +226,7 @@ function App() {
           </div>
 
           <div className="footer-col">
-            <h4>Localização</h4>
+            <h4 style={{fontFamily: 'Montserrat'}}>Localização</h4>
             <p style={{display: 'flex', alignItems: 'flex-start', gap: '0.75rem'}}>
               <MapPin size={22} color="var(--primary)" /> 
               Atendimento Online em todo Brasil<br />
