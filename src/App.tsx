@@ -15,6 +15,11 @@ import {
   Check
 } from 'lucide-react'
 
+// Import de imagens locais
+import logoImg from './assets/images/logo.png'
+import draHero from './assets/images/dra-hero.png'
+import draAbout from './assets/images/dra-about.jpg'
+
 const WhatsAppIcon = ({ size = 24, color = "currentColor" }) => (
   <svg 
     width={size} 
@@ -46,9 +51,12 @@ function App() {
 
       {/* Header */}
       <header>
-        <a href="/" className="logo">
-          Dra. Daniela Protásio
-          <span>Medicina Integrativa</span>
+        <a href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <img src={logoImg} alt="Logo Dra. Daniela Protásio" style={{ height: '60px', width: 'auto' }} />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            Dra. Daniela Protásio
+            <span>Medicina Integrativa</span>
+          </div>
         </a>
         <nav>
           <ul>
@@ -81,10 +89,16 @@ function App() {
           </div>
         </div>
         <div className="hero-image">
-          {/* Placeholder for professional photo */}
-          <div className="hero-img-placeholder" style={{backgroundColor: '#f1f1f1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '1rem', textAlign: 'center', padding: '2rem'}}>
-            [ Foto Profissional da Dra. Daniela ]
-          </div>
+          <img 
+            src={draHero} 
+            alt="Dra. Daniela Protásio" 
+            className="hero-img-placeholder"
+            style={{ 
+              background: 'transparent', 
+              boxShadow: 'none', 
+              filter: 'drop-shadow(20px 20px 0px var(--primary-light))' 
+            }} 
+          />
         </div>
       </section>
 
@@ -118,9 +132,12 @@ function App() {
       {/* About Section */}
       <section className="about" id="sobre">
         <div className="hero-image">
-           <div className="hero-img-placeholder" style={{height: '450px', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999'}}>
-             [ Foto Consultório / Atendimento ]
-           </div>
+           <img 
+              src={draAbout} 
+              alt="Consultório Dra. Daniela" 
+              className="hero-img-placeholder" 
+              style={{ height: '550px', width: '100%', objectFit: 'cover' }} 
+            />
         </div>
         <div className="about-text">
           <span style={{letterSpacing: '4px', textTransform: 'uppercase', fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600, display: 'block', marginBottom: '1.5rem'}}>Sobre a Doutora</span>
@@ -179,9 +196,12 @@ function App() {
       <footer id="contato">
         <div className="footer-grid">
           <div className="footer-col">
-            <a href="/" className="logo" style={{marginBottom: '2rem', display: 'inline-block'}}>
-              Dra. Daniela Protásio
-              <span>Medicina Integrativa</span>
+            <a href="/" className="logo" style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img src={logoImg} alt="Logo Dra. Daniela" style={{ height: '50px' }} />
+              <div>
+                Dra. Daniela Protásio
+                <span>Medicina Integrativa</span>
+              </div>
             </a>
             <p style={{maxWidth: '300px'}}>Promovendo saúde integral e natural através de um atendimento médico humanizado.</p>
             <div style={{display: 'flex', gap: '1rem', marginTop: '2rem'}}>
